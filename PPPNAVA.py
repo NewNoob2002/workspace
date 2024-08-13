@@ -63,7 +63,9 @@ def read_and_analyze_pppnava_file(filename):
     # 经纬度散点图，标注平均值
     plt.subplot(3, 1, 1)
     plt.scatter(longitudes, latitudes, color='blue', label='Positions')
-    plt.scatter(mean_longitude, mean_latitude, color='red', label='Mean Position', marker='x', s=100)
+    plt.scatter(mean_longitude, mean_latitude, color='red', label='Mean Position', marker='x', s=100)    
+    plt.text(mean_longitude, mean_latitude, f"({mean_longitude:.10f}, {mean_latitude:.10f})",
+             fontsize=10, ha='right', color='red')
     plt.gca().xaxis.set_major_formatter(plt.FormatStrFormatter('%.10f'))
     plt.gca().yaxis.set_major_formatter(plt.FormatStrFormatter('%.10f'))
     plt.title("Position Plot with Mean Position")
@@ -92,8 +94,9 @@ def read_and_analyze_pppnava_file(filename):
     plt.legend()
     plt.grid(True)
 
-    plt.tight_layout()
+    # 调整布局，增加间隔，防止标题遮挡
+    plt.tight_layout(pad=10.0)
     plt.show()
 
 # 示例：读取并分析存储PPPNAVA报文的txt文件
-read_and_analyze_pppnava_file('PPPNAVA_8_9-15-56.txt')
+read_and_analyze_pppnava_file('PPPNAVA_8_8-15-56.txt')
